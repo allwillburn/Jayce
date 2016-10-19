@@ -15,7 +15,7 @@ function AutoUpdate(data)
     if tonumber(data) > tonumber(ver) then
         PrintChat('<font color = "#00FFFF">New version found! ' .. data)
         PrintChat('<font color = "#00FFFF">Downloading update, please wait...')
-        DownloadFileAsync('https://raw.githubusercontent.com/allwillburn/Jayce/master/Jayce.lua.lua', SCRIPT_PATH .. 'Jayce.lua', function() PrintChat('<font color = "#00FFFF">Jayce Update Complete, please 2x F6!') return end)
+        DownloadFileAsync('https://raw.githubusercontent.com/allwillburn/Jayce/master/Jayce.lua', SCRIPT_PATH .. 'Jayce.lua', function() PrintChat('<font color = "#00FFFF">Jayce Update Complete, please 2x F6!') return end)
     else
         PrintChat('<font color = "#00FFFF">No Jayce updates found!')
     end
