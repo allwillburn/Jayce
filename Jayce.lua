@@ -1,4 +1,4 @@
-local ver = "0.05"
+local ver = "0.06"
 
 if FileExist(COMMON_PATH.."MixLib.lua") then
  require('MixLib')
@@ -130,49 +130,49 @@ OnTick(function (myHero)
 			CastSpell(RHydra)
             end
 				
-	    if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 1250) then           
+				
+				
+				
+	    if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 1250) and myHero.isRanged then           
 			CastSkillShot(_E, target.pos) 
-            end		
+            end	
+				
 				
 	    if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 1200) and myHero.isRanged then
                  local QPred = GetPrediction(target,JayceQ)
                  if QPred.hitChance > (JayceMenu.Combo.Qpred:Value() * 0.1) and not QPred:mCollision(1) then
                            CastSkillShot(_Q, QPred.castPos)
                  end
-            end					
-
-            if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 600) then 
-                        CastTargetSpell(target, _Q)                                                       
-            end
-
-            if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 240) then			
-                        CastTargetSpell(target, _E)
-            end
-                   
-
-            if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 600) then 
-                        CastTargetSpell(target, _Q)                                                       
-            end
-
-            if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 1050) then
-                        CastSkillShot(_Q, target.pos) 
-            end
-                        
-	    if JayceMenu.Combo.W:Value() and Ready(_W) then
+            end	
+				
+	    if JayceMenu.Combo.W:Value() and Ready(_W) and ValidTarget(target, 600) and myHero.isRanged then
 			CastSpell(_W)
-	    end
-
-            if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 240) then			
+	    end 
+				
+	    if JayceMenu.Combo.R:Value() and ValidTarget(target, 600) then
+			CastSpell(_R)
+            end 			
+				
+				
+				
+            
+            if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 240) and myHero.isMelee then			
                         CastTargetSpell(target, _E)
-            end
+            end   
+
+            if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 600) and myHero.isMelee then 
+                        CastTargetSpell(target, _Q)                                                       
+            end           
+                        
+	    if JayceMenu.Combo.W:Value() and Ready(_W) and ValidTarget(target, 600) and myHero.isMelee then
+			CastSpell(_W)
+	    end            
 	    
             if JayceMenu.Combo.R:Value() and ValidTarget(target, 600) then
 			CastSpell(_R)
             end 
 
-            if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 600) then 
-                        CastTargetSpell(target, _Q)                                                       
-            end
+            
            
             
                               
