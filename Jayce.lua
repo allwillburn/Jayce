@@ -1,4 +1,4 @@
-local ver = "0.03"
+local ver = "0.04"
 
 if FileExist(COMMON_PATH.."MixLib.lua") then
  require('MixLib')
@@ -10,6 +10,7 @@ end
 if GetObjectName(GetMyHero()) ~= "Jayce" then return end
 
 require("DamageLib")
+require("OpenPredict")
 
 function AutoUpdate(data)
     if tonumber(data) > tonumber(ver) then
