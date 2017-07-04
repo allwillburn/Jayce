@@ -1,4 +1,4 @@
-local ver = "0.01"
+local ver = "0.03"
 
 if FileExist(COMMON_PATH.."MixLib.lua") then
  require('MixLib')
@@ -32,6 +32,7 @@ local JayceMenu = Menu("Jayce", "Jayce")
 JayceMenu:SubMenu("Combo", "Combo")
 
 JayceMenu.Combo:Boolean("Q", "Use Q in combo", true)
+JayceMenu.Combo:Slider("Qpred", "Q Hit Chance", 3,0,10,1)
 JayceMenu.Combo:Boolean("W", "Use W in combo", true)
 JayceMenu.Combo:Boolean("E", "Use E in combo", true)
 JayceMenu.Combo:Boolean("R", "Use R in combo", true)
@@ -82,6 +83,7 @@ OnTick(function (myHero)
 	local Tiamat = GetItemSlot(myHero, 3077)
         local Gunblade = GetItemSlot(myHero, 3146)
         local BOTRK = GetItemSlot(myHero, 3153)
+	local JayceQ = {delay = 0.25, range = 1470, width = 70, speed = 1890}	
 
 	--AUTO LEVEL UP
 	if JayceMenu.AutoMode.Level:Value() then
@@ -126,6 +128,17 @@ OnTick(function (myHero)
             if JayceMenu.Combo.RHydra:Value() and RHydra > 0 and Ready(RHydra) and ValidTarget(target, 400) then
 			CastSpell(RHydra)
             end
+				
+	    if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 1250) then           
+			CastSkillShot(_E, target.pos) 
+            end		
+				
+	    if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 1200) then
+                 local QPred = GetPrediction(target,JayceQ)
+                 if QPred.hitChance > (JayceMenu.Combo.Qpred:Value() * 0.1) and not QPred:mCollision(1) then
+                           CastSkillShot(_Q, QPred.castPos)
+                 end
+            end					
 
             if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 600) then 
                         CastTargetSpell(target, _Q)                                                       
@@ -134,10 +147,7 @@ OnTick(function (myHero)
             if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 240) then			
                         CastTargetSpell(target, _E)
             end
-           
-            if JayceMenu.Combo.E:Value() and Ready(_E) and ValidTarget(target, 1050) then           
-			CastSkillShot(_E, target.pos) 
-            end
+                   
 
             if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 600) then 
                         CastTargetSpell(target, _Q)                                                       
