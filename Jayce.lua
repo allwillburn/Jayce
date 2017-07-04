@@ -1,4 +1,4 @@
-local ver = "0.04"
+local ver = "0.05"
 
 if FileExist(COMMON_PATH.."MixLib.lua") then
  require('MixLib')
@@ -134,7 +134,7 @@ OnTick(function (myHero)
 			CastSkillShot(_E, target.pos) 
             end		
 				
-	    if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 1200) then
+	    if JayceMenu.Combo.Q:Value() and Ready(_Q) and ValidTarget(target, 1200) and myHero.isRanged then
                  local QPred = GetPrediction(target,JayceQ)
                  if QPred.hitChance > (JayceMenu.Combo.Qpred:Value() * 0.1) and not QPred:mCollision(1) then
                            CastSkillShot(_Q, QPred.castPos)
